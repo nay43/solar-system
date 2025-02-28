@@ -13,6 +13,7 @@ env:
 
 jobs:
   unit-testing:
+    name: Unit Testing
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -22,13 +23,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          
+
       - name: Cache NPM dependencies
         uses: actions/cache@v4
         with:
           path: node_modules
           key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
-          
+
       - name: Install Dependencies
         run: npm install
 
@@ -41,7 +42,7 @@ jobs:
         with:
           name: Mocha-Test-Result
           path: test-results.xml
-          
+
   code-coverage:
     name: Code Coverage
     runs-on: ubuntu-latest
@@ -53,7 +54,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          
+
       - name: Cache NPM dependencies
         uses: actions/cache@v4
         with:
@@ -73,7 +74,7 @@ jobs:
           name: Code-Coverage-Result
           path: coverage
           retention-days: 5
-          
+
   docker:
     name: Containerization
     needs: [unit-testing, code-coverage]
