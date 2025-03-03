@@ -155,6 +155,12 @@ jobs:
         with:
           version: 'v1.26.0'
 
+      - name: Setup Kubeconfig file
+        uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}}
+
       - name: Fetch Kubernetes Cluster Details
         run: |
           kubectl version --short
